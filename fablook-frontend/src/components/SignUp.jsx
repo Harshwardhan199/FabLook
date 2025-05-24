@@ -146,7 +146,7 @@ const SignUpForm = () => {
 			console.log("User created as:", userCredential.user.email);
 
 			// Send user data to Backend for user registration
-			await axios.post("http://localhost:5000/api/users/registerUser", {
+			await axios.post("https://fablook.onrender.com/api/users/registerUser", {
 				UID: user.uid,
 				name,
 				email,
@@ -187,7 +187,7 @@ const SignUpForm = () => {
 
 			console.log("Google user created/logged in:", user.displayName, user.email, user.photoURL);
 
-			await axios.post("http://localhost:5000/api/users/registerUser", {
+			await axios.post("https://fablook.onrender.com/api/users/registerUser", {
 				UID: user.uid,
 				name: user.displayName,
 				email: user.email,

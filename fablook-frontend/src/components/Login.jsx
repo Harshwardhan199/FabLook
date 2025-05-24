@@ -72,7 +72,7 @@ const LoginForm = () => {
 
 				try {
 					// Mark user verified:true in DB
-					await axios.post("http://localhost:5000/api/users/verifyUser", {
+					await axios.post("https://fablook.onrender.com/api/users/verifyUser", {
 						UID: user.uid,
 					}, {
 						headers: {
@@ -118,7 +118,7 @@ const LoginForm = () => {
 			const result = await signInWithPopup(auth, provider);
 			const user = result.user;
 
-			await axios.post("http://localhost:5000/api/users/registerUser", {
+			await axios.post("https://fablook.onrender.com/api/users/registerUser", {
 				UID: user.uid,
 				name: user.displayName,
 				email: user.email,

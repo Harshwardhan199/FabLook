@@ -9,6 +9,8 @@ import "./Home.css";
 
 const Home = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [userMenuEnter, setUserMenuEnter] = useState(false);
+
 	const [isScrolling, setIsScrolling] = useState(false);
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,7 +30,7 @@ const Home = () => {
 
 	const retrieveUserData = async () => {
 		try {
-			const response = await axios.post("http://localhost:5000/api/users/userDataDB", {
+			const response = await axios.post("https://fablook.onrender.com/api/users/userDataDB", {
 				UID: user.uid
 			}, {
 				headers: {
@@ -36,7 +38,9 @@ const Home = () => {
 				},
 			});
 
-			setUserName(response.data.name);
+			let formattedName = response.data.name.split(" ")[0].charAt(0).toUpperCase() + response.data.name.split(" ")[0].slice(1).toLowerCase();
+
+			setUserName(formattedName);
 		}
 		catch (error) {
 			console.error("Error Fetching User Data:", error.message);
@@ -202,20 +206,40 @@ const Home = () => {
 		}, 800);
 	}
 
+	const checkMouseEnterWhenLeavingAccountBtn = () => {
+
+		if (userMenuEnter) {
+			setIsOpen(true);
+		}
+		else {
+			setIsOpen(false);
+		}
+	}
+
 	return (
 		<div className="home-container">
+			{/* Navigation Bar */}
 			<div className="navigation-bar">
 				<div className="logo">FabLook</div>
+				<div className="search-bar-container">
+					<button className="category-Selector">Fablook Fashion ⏷</button>
+					<input type="text" placeholder="Search Fablook.in" />
+					<button className="search-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" viewBox="0 0 16 16">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+						</svg>
+
+					</button>
+				</div>
 				<div className="nav-links">
-					<a href="#home">Home</a>
-					<a href="#cart">Cart</a>
-					<a onClick={LoginUser} ref={userNameRef}>{isLoggedIn ? userName : "Login"}</a>
-					<a href="#profile">
-						<img src={profileImageUrl || "/assets/OIP.jpeg"} alt="Profile" className="profile-img" onClick={() => setIsOpen(!isOpen)} referrerPolicy="no-referrer"/>
-					</a>
+					<div className="accounts-btn" onMouseEnter={() => setIsOpen(true)} onMouseLeave={checkMouseEnterWhenLeavingAccountBtn}>
+						<img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-52e0dc.svg" alt="Profile" className="profile-img" referrerPolicy="no-referrer" />
+						<p>Account</p>
+						<img src="https://img.icons8.com/?size=100&id=89230&format=png&color=ffffff" alt="Arrow icon" className="arrow-img" />
+					</div>
 
 					{isOpen &&
-						<div className="userMenu" >
+						<div className="userMenu" onMouseEnter={() => setUserMenuEnter(true)} onMouseLeave={() => { setUserMenuEnter(false); setIsOpen(false); }} >
 							<a href="#">Profile</a>
 							<hr style={{ width: "100%", height: "1px", backgroundColor: "black", border: "none", margin: "5px 0" }} />
 							<a href="#">Settings</a>
@@ -224,56 +248,63 @@ const Home = () => {
 						</div>
 					}
 
+					<div className="cart-btn">
+						<img src="https://img.icons8.com/?size=100&id=43866&format=png&color=FFFFFF" alt="Cart icon" />
+						<p>Cart</p>
+					</div>
+
 				</div>
 			</div>
 
-			<div className="category-container">
+			{/* Categories */}
+			<div className="category-icon-container">
 				<div className="categories" ref={catContRef}>
 					<a href="#category">
 						<img src="/assets/categories/mens.png" alt="Men" className="category-img" />
-						<p className="categoryName">Men</p>
+						<p className="category-icon-name">Men</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/womens.png" alt="Women" className="category-img" />
-						<p className="categoryName">Women</p>
+						<p className="category-icon-name">Women</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/kids.png" alt="Kids" className="category-img" />
-						<p className="categoryName">Kids</p>
+						<p className="category-icon-name">Kids</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/footwear.png" alt="Footwear" className="category-img" />
-						<p className="categoryName">Footwear</p>
+						<p className="category-icon-name">Footwear</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/luggage__bags.png" alt="Luggage & Bags" className="category-img" />
-						<p className="categoryName">Luggage & Bags</p>
+						<p className="category-icon-name">Luggage & Bags</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/jewellery.png" alt="Jewellery" className="category-img" />
-						<p className="categoryName">Jewellery</p>
+						<p className="category-icon-name">Jewellery</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/watches.png" alt="Watches" className="category-img" />
-						<p className="categoryName">Watches</p>
+						<p className="category-icon-name">Watches</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/beauty.png" alt="Beauty" className="category-img" />
-						<p className="categoryName">Beauty</p>
+						<p className="category-icon-name">Beauty</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/handbags.png" alt="Handbags" className="category-img" />
-						<p className="categoryName">Handbags</p>
+						<p className="category-icon-name">Handbags</p>
 					</a>
 					<a href="#category">
 						<img src="/assets/categories/eyewear.png" alt="eyewear" className="category-img" />
-						<p className="categoryName">Eyewear</p>
+						<p className="category-icon-name">Eyewear</p>
 					</a>
 				</div>
 				<button className="pre-category-btn" onClick={scrollLeft}>&lt;</button>
 				<button className="next-category-btn" onClick={scrollRight}>&gt;</button>
 			</div>
 
+			{/* Best Deals */}
 			<div className="deal-container">
 				<div className="deals" ref={dealContRef} onScroll={handleScroll}>
 					{/*  */}
@@ -309,6 +340,88 @@ const Home = () => {
 				<div className="scrollDot" id="dot-3"></div>
 			</div>
 
+			{/* Important News */}
+			<div className="sale">
+				<img src="/assets/sale.jpg" alt="Deal" className="deal-img" />
+			</div>
+
+			{/* Category 1 */}
+			<div className="category">
+				<p className="category-title"><b>Shop Women</b></p>
+				<div className="top-deals">
+					<div className="deals">
+						<a href="#deal">
+							<img src="/assets/deals/3.jpg" alt="Deal" className="deal-img" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div className="scrollDotContainer">
+				<div className="scrollDot" id="dot-1"></div>
+				<div className="scrollDot" id="dot-2"></div>
+				<div className="scrollDot" id="dot-3"></div>
+			</div>
+			<div className="sub-category-container">
+				<div className="sub-categories">
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/women.png" alt="" className="sub-category-img" />
+					</div>
+				</div>
+			</div>
+
+			{/* Category 2 */}
+			<div className="category">
+				<p className="category-title"><b>Shop Men</b></p>
+				<div className="top-deals">
+					<div className="deals">
+						<a href="#deal">
+							<img src="/assets/men1.jpg" alt="Deal" className="deal-img" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div className="scrollDotContainer">
+				<div className="scrollDot" id="dot-1"></div>
+				<div className="scrollDot" id="dot-2"></div>
+				<div className="scrollDot" id="dot-3"></div>
+			</div>
+			<div className="sub-category-container">
+				<div className="sub-categories">
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+					<div className="sub-category">
+						<img src="/assets/men.png" alt="" className="sub-category-img" />
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

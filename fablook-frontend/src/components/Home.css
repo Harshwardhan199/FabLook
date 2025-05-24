@@ -9,29 +9,81 @@
 	flex-direction: column;
 
 	width: 100%;
-	height: 200vw;
 	margin: 0;
 	padding: 0;
+
+	font-family: Verdana, Tahoma, sans-serif;
 }
 
 .navigation-bar {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 
 	width: 100%;
-	height: 60px;
+	height: 55px;
 
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 0px 30px 0px 30px;
 
-	gap: 20px;
+	gap: 30px;
 	background-color: #131921;
 }
 
 .logo {
 	color: white;
-	font-size: 2rem;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.search-bar-container {
+	display: flex;
+	align-items: center;
+
+	flex: 1;
+	max-width: 750px;
+}
+
+.category-Selector {
+	height: 40px;
+
+	padding: 10px 10px 10px 10px;
+
+	border: none;
+	border-radius: 4px 0px 0px 4px;
+
+	background-color: #e6e6e6;
+
+	font-size: 14px;
+	color: #595959;
+}
+
+.search-bar-container input {
+	flex: 1;
+	height: 40px;
+
+	text-indent: 10px;
+	font-size: 16px;
+
+	outline: none;
+
+	border: 2px solid transparent;
+}
+
+.search-bar-container input:focus {
+	border: 2px solid #FF9900;
+}
+
+.search-btn {
+	height: 40px;
+
+	padding: 10px 20px 10px 20px;
+
+	border: none;
+	border-radius: 0px 4px 4px 0px;
+
+	background-color: #febd69;
+
+	font-size: 18px;
 }
 
 .nav-links {
@@ -40,6 +92,7 @@
 	justify-content: center;
 
 	position: relative;
+
 	gap: 20px;
 }
 
@@ -49,23 +102,57 @@
 	font-size: 1.5rem;
 }
 
-.nav-links p {
-	color: white;
-	text-decoration: none;
-	font-size: 1.5rem;
-}
-
 .nav-links a:hover {
 	color: #FF9900;
+}
+
+.accounts-btn {
+	display: flex;
+	align-items: center;
+
+	padding: 6px;
+
+	border-radius: 2px;
+	border: 1px solid transparent;
+
+	background-color: rgb(19, 25, 33);
+
+	z-index: 2;
+}
+
+.accounts-btn:hover {
+	border: 1px solid white;
 }
 
 .profile-img {
 	display: block;
 	object-fit: cover;
 
+	width: 35px;
+	height: 35px;
+
+	margin-right: 10px;
 	border-radius: 50%;
+
+	filter: invert();
+}
+
+.accounts-btn p {
+	color: white;
+	text-decoration: none;
+	font-size: 24px;
+
+	margin-right: 10px;
+}
+
+.arrow-img {
+	display: block;
+	object-fit: cover;
+
 	width: 30px;
 	height: 30px;
+
+	transform: rotate(90deg);
 }
 
 .userMenu {
@@ -75,16 +162,18 @@
 	justify-content: center;
 
 	position: absolute;
-	top: 50px;
-	right: -15px;
+	top: 100%;
+	left: 0px;
 
+	width: 194.5px;
 	padding: 10px;
 
-	background-color: #e0e0e0;
+	background-color: #ffffff;
 
 	border-radius: 4px;
-
 	box-shadow: #000000 0px 0px 2px 0px;
+
+	z-index: 1;
 }
 
 .userMenu a {
@@ -97,16 +186,36 @@
 	color: black;
 }
 
-/* .line{
-  width: 100%;
-  height: 1px;
+.cart-btn {
+	display: flex;
+	align-items: center;
 
-  margin: 5px 0;
+	padding: 6px;
 
-  border: none;
-  background-color: #000000; 
-} */
-.category-container {
+	border-radius: 2px;
+	border: 1px solid transparent;
+}
+
+.cart-btn:hover {
+	border: 1px solid white;
+}
+
+.cart-btn img {
+	display: block;
+	object-fit: cover;
+
+	width: 35px;
+	height: 35px;
+
+	margin-right: 5px;
+}
+
+.cart-btn p {
+	color: white;
+	font-size: 24px;
+}
+
+.category-icon-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -115,9 +224,7 @@
 
 	height: 200px;
 
-	margin: 20px 120px;
-
-	/* background-color: bisque; */
+	margin: 20px 70px;
 }
 
 .categories {
@@ -147,7 +254,7 @@
 	height: 150px;
 }
 
-.categoryName {
+.category-icon-name {
 	margin-top: 10px;
 	text-align: center;
 }
@@ -179,8 +286,8 @@
 	right: 0;
 }
 
-.category-container:hover .pre-category-btn,
-.category-container:hover .next-category-btn {
+.category-icon-container:hover .pre-category-btn,
+.category-icon-container:hover .next-category-btn {
 	display: block;
 	opacity: 1;
 	visibility: visible;
@@ -196,7 +303,7 @@
 
 	position: relative;
 
-	margin: 0px 100px;
+	margin: 0px 50px;
 }
 
 .deals {
@@ -217,7 +324,7 @@
 .deal-img {
 	display: block;
 
-	width: 1484px;
+	width: 1584px;
 	height: 480px;
 }
 
@@ -273,4 +380,56 @@
 
 	border-radius: 50%;
 	background-color: #595959;
+}
+
+.sale {
+	display: flex;
+	justify-content: center;
+
+	width: 100%;
+
+	margin: 30px 0px;
+}
+
+.category {
+	margin: 0px 50px;
+}
+
+.category-title {
+	font-size: 24px;
+
+	margin-bottom: 10px;
+}
+
+.top-deals {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: relative;
+
+
+}
+
+.sub-category-container {
+	display: flex;
+	justify-content: center;
+
+	margin: 30px 0px;
+}
+
+.sub-categories {
+	display: flex;
+
+	gap: 10px;
+}
+
+.sub-category {}
+
+.sub-category-img {
+	display: block;
+	object-fit: cover;
+
+	width: 250px;
+	height: 250px;
 }
